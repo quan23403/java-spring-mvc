@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.UserService;
 
 // @RestController
@@ -32,7 +33,7 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
-    } 
+    }
 
     @RequestMapping("/")
     public String getHomePage(Model model) {
@@ -41,4 +42,16 @@ public class UserController {
         model.addAttribute("hoidanit", "from TCLC");
         return "hello";
     }
+
+    @RequestMapping("/admin/user")
+    public String getUserPage(Model model) {
+        model.addAttribute("newUser", new User());
+        return "admin/user/create";
+    }
+
+    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
+    public String createUserPage() {
+        return "hello";
+    }
+
 }
