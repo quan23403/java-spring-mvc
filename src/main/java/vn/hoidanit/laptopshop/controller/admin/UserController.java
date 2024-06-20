@@ -1,30 +1,23 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.ServletContext;
+import jakarta.validation.Valid;
 import vn.hoidanit.laptopshop.domain.User;
-import vn.hoidanit.laptopshop.repository.UserRepository;
 import vn.hoidanit.laptopshop.service.UpLoadService;
 import vn.hoidanit.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 // @RestController
 // public class UserController {
@@ -92,9 +85,18 @@ public class UserController {
 
     @PostMapping(value = "/admin/user/create")
     public String createUserPage(Model model,
-            @ModelAttribute("newUser") User hoidanit,
+            @ModelAttribute("newUser") @Valid User hoidanit,
+            BindingResult newUserBindingResult,
             @RequestParam("hoidanitFile") MultipartFile file) {
 
+        List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>>>" + error.getField() + " - " + error.getDefaultMessage());
+        }
+
+        if (newUserBindingResult.hasErrors()) {
+            return "/admin/user/create";
+        }
         String avatar = this.upLoadService.handleSaveUpLoadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(hoidanit.getPassword());
 

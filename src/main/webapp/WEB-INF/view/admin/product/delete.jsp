@@ -22,29 +22,30 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Detail User</h1>
+                                <h1 class="mt-4">Delete User</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Users</li>
+                                    <li class="breadcrumb-item active">Product</li>
                                 </ol>
-                                <div class="mt-5">
+                                <div class="container mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
                                             <div class="d-flex justify-content-between">
-                                                <h3>User Detail id = ${user.id}</h3>
+                                                <h3>Delete Product id = ${id}</h3>
                                             </div>
                                             <hr />
-                                            <div class="card" style="width: 60%">
-                                                <div class="card-header">
-                                                    User Infomation
-                                                </div>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">ID: ${user.id} </li>
-                                                    <li class="list-group-item">Email: ${user.email} </li>
-                                                    <li class="list-group-item">Full Name: ${user.fullName} </li>
-                                                    <li class="list-group-item">Addrees: ${user.address} </li>
-                                                </ul>
+                                            <div class="alert alert-danger" role="alert">
+                                                Are you sure to delete this Product !
                                             </div>
+                                            <form:form method="POST" action="/admin/product/delete"
+                                                modelAttribute="product">
+                                                <div class="mb-3 d-none">
+                                                    <label class="form-label">ID: </label>
+                                                    <form:input value="${id}" type="text" class="form-control"
+                                                        path="id" />
+                                                </div>
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form:form>
                                         </div>
                                     </div>
                                 </div>
