@@ -45,11 +45,9 @@
                                             <form:form method="POST" action="/admin/product/create"
                                                 modelAttribute="newProduct" class="row g-3"
                                                 enctype="multipart/form-data">
-
                                                 <c:set var="errorName">
                                                     <form:errors path="name" cssClass="invalid-feedback" />
                                                 </c:set>
-
                                                 <c:set var="errorPrice">
                                                     <form:errors path="price" cssClass="invalid-feedback" />
                                                 </c:set>
