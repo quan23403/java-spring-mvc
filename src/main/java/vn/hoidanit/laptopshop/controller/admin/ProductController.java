@@ -65,7 +65,7 @@ public class ProductController {
         Product product = this.productService.handleGetProductById(id);
         model.addAttribute("id", id);
         model.addAttribute("product", product);
-        return "/admin/product/detail";
+        return "admin/product/detail";
     }
 
     @GetMapping("/admin/product/update/{id}")
@@ -74,7 +74,7 @@ public class ProductController {
         model.addAttribute("product", product);
         System.out.println(product.getId());
 
-        return "/admin/product/update";
+        return "admin/product/update";
     }
 
     @PostMapping("/admin/product/update")
@@ -111,7 +111,7 @@ public class ProductController {
         Product product = this.productService.handleGetProductById(id);
         model.addAttribute("id", id);
         model.addAttribute("product", product);
-        return "/admin/product/delete";
+        return "admin/product/delete";
     }
 
     @PostMapping("/admin/product/delete")
